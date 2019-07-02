@@ -7,23 +7,32 @@
             <el-table :data="tableData" style="width: 100%" height="350">
               <el-table-column prop="goodsName" label="商品名称" width="150"></el-table-column>
               <el-table-column prop="count" label="数量" width="120"></el-table-column>
-              <el-table-column prop="money" label="金额" width="120"></el-table-column>
+              <el-table-column prop="price" label="金额" width="120"></el-table-column>
               <el-table-column prop="operation" label="操作" width="120" fixed="right">
                 <template slot-scope="scope">
-                  <el-button @click="handleClick(scope.row)" type="text" size="small">添加</el-button>
+                  <el-button @click="addOrderLIst(scope.row)" type="text" size="small">添加</el-button>
                   <el-button
                     type="text"
                     size="small"
-                    @click.native.prevent="deleteRow(scope.$index, tableData)"
+                    @click.native.prevent="deleteRow(scope.row)"
                   >删除</el-button>
                 </template>
               </el-table-column>
             </el-table>
-
+            <el-row class="tota">
+              <el-col :span="4" :offset="7">
+                <small>数量：</small>
+                <span>{{totaCount}}</span>
+              </el-col>
+              <el-col :span="6" :offset="1">
+                <small>总价：</small>
+                <span>{{totaMoney}}元</span>
+              </el-col>
+            </el-row>
             <el-row class="btn-row">
               <el-button type="warning">挂单</el-button>
-              <el-button type="danger">删除</el-button>
-              <el-button type="success">结账</el-button>
+              <el-button type="danger" @click="deleteAll">删除</el-button>
+              <el-button type="success" @click="checkout">结账</el-button>
             </el-row>
           </el-tab-pane>
           <el-tab-pane label="挂单">挂单</el-tab-pane>
@@ -34,9 +43,9 @@
         <div class="title">常用商品</div>
         <div class="goods-list">
           <ul>
-            <li v-for="(goodsData,index) in goodsDatas" :key="index">
-              {{goodsData.goodsName}}
-              <span class="price">￥{{goodsData.price}}元</span>
+            <li v-for="(goods,index) in goodsData" :key="index" @click="addOrderLIst(goods)">
+              {{goods.goodsName}}
+              <span class="price">￥{{goods.price}}元</span>
             </li>
           </ul>
         </div>
@@ -44,13 +53,13 @@
           <el-tabs>
             <el-tab-pane label="汉堡">
               <ul class="cookList">
-                <li v-for="(cookData,index) in cookDatas" :key="index">
+                <li v-for="(goods,index) in cookData" :key="index" @click="addOrderLIst(goods)">
                   <span>
-                    <img :src="cookData.img" alt width="100px" />
+                    <img :src="goods.img" alt width="100px" />
                   </span>
                   <span>
-                    {{cookData.cookName}}
-                    <p>￥{{cookData.price}}元</p>
+                    {{goods.goodsName}}
+                    <p>￥{{goods.price}}元</p>
                   </span>
                 </li>
               </ul>
@@ -72,45 +81,95 @@ export default {
   data() {
     return {
       tableData: [],
-      goodsDatas: [],
-      cookDatas: []
+      goodsData: [],
+      cookData: [],
+      totaCount: 0,
+      totaMoney: 0
     };
   },
   methods: {
-    handleClick(row) {
-      console.log(row);
+    addOrderLIst(goods) {
+      // 商品是否已经存在于订单列表中
+      let isHave = false;
+      for (let i = 0; i < this.tableData.length; i++) {
+        if (this.tableData[i].goodsId == goods.goodsId) {
+          isHave = true;
+        }
+      }
+
+      // 判断是否存在，若存在则数量加1
+      if (isHave) {
+        let arr = this.tableData.filter(
+          result => result.goodsId == goods.goodsId
+        );
+        arr[0].count++;
+      } else {
+        // 若不存在，则构建新数组对象，并将新数组对象push到原数组当中
+        let newGoods = {
+          goodsId: goods.goodsId,
+          goodsName: goods.goodsName,
+          count: 1,
+          price: goods.price
+        };
+        this.tableData.push(newGoods);
+      }
+      this.getAllMoney();
     },
-    deleteRow(index, rows) {
-      rows.splice(index, 1);
+    // 删除单个商品
+    deleteRow(goods) {
+      this.tableData = this.tableData.filter(
+        result => result.goodsId != goods.goodsId
+      );
+      this.getAllMoney();
+    },
+    // 计算商品的金额和数量
+    getAllMoney() {
+      // 每次清零，避免重复添加
+      this.totaCount = 0;
+      this.totaMoney = 0;
+      if (this.tableData) {
+        this.tableData.forEach(element => {
+          this.totaCount += element.count;
+          this.totaMoney = this.totaMoney + element.price * element.count;
+        });
+      }
+    },
+    // 删除所有商品
+    deleteAll() {
+      (this.tableData = []), (this.totaCount = 0), (this.totaMoney = 0);
+    },
+    // 结账
+    checkout() {
+      if (this.totaCount != 0) {
+        this.tableData = [];
+        this.totaCount = 0;
+        this.totaMoney = 0;
+        this.$message({
+          message: "结账成功！",
+          type: "success"
+        });
+      } else {
+        this.$message.error("商品列表为空，请先添加商品！");
+      }
     }
   },
   created() {
     axios({
-      url: "static/tableData.json",
+      url: "static/goodsData.json",
       method: "GET"
     })
       .then(response => {
-        this.tableData = response.data;
+        this.goodsData = response.data;
       })
       .catch(error => {
         console.log(error);
       });
     axios({
-      url: "static/goodsDatas.json",
+      url: "static/cookData.json",
       method: "GET"
     })
       .then(response => {
-        this.goodsDatas = response.data;
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    axios({
-      url: "static/cookDatas.json",
-      method: "GET"
-    })
-      .then(response => {
-        this.cookDatas = response.data;
+        this.cookData = response.data;
       })
       .catch(error => {
         console.log(error);
@@ -156,6 +215,7 @@ export default {
       background-color: #fff;
       padding: 10px;
       margin: 10px;
+      cursor: pointer;
     }
   }
 }
@@ -179,6 +239,7 @@ export default {
     align-items: center;
     padding-right: 10px;
     margin: 5 px;
+    cursor: pointer;
 
     span:nth-of-type(2) {
       color: red;
@@ -188,5 +249,12 @@ export default {
       }
     }
   }
+}
+
+.tota {
+  min-height: 40px;
+  background-color: #ffffff;
+  line-height: 40px;
+  border-bottom: 1px solid #EBEEF5;
 }
 </style>

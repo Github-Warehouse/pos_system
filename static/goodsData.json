@@ -1,22 +1,27 @@
 [
     {
+        "goodsId": 1,
         "goodsName":"香辣鸡腿堡",
         "price":18
     },
     {
+        "goodsId": 2,
         "goodsName":"鸡腿堡",
         "price":19
     },
     {
+        "goodsId": 3,
         "goodsName":"甜筒",
         "price":20
     },
     {
+        "goodsId": 4,
         "goodsName":"可乐",
         "price":21
     },
     {
-        "goodsName":"香辣鸡腿堡",
+        "goodsId": 5,
+        "goodsName":"香辣鸡翅",
         "price":22
     }
 ]
