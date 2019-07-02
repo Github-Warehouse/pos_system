@@ -1,7 +1,7 @@
 <template>
   <div class="pos">
     <el-row>
-      <el-col :span="7" class="pos-order" id="order-list">
+      <el-col :span="8" class="pos-order" id="order-list">
         <el-tabs>
           <el-tab-pane label="点餐">
             <el-table :data="tableData" style="width: 100%" height="350">
@@ -30,7 +30,7 @@
           <el-tab-pane label="外卖">外卖</el-tab-pane>
         </el-tabs>
       </el-col>
-      <el-col :span="17" class="pos-commodity">
+      <el-col :span="16" class="pos-commodity">
         <div class="title">常用商品</div>
         <div class="goods-list">
           <ul>
@@ -44,17 +44,13 @@
           <el-tabs>
             <el-tab-pane label="汉堡">
               <ul class="cookList">
-                <li>
+                <li v-for="(cookData,index) in cookDatas" :key="index">
                   <span>
-                    <img
-                      src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1562002507880&di=0432bd6c522979a221f91d003fe0900e&imgtype=0&src=http%3A%2F%2Fpic179.nipic.com%2Ffile%2F20180829%2F26823374_155016867000_2.jpg"
-                      alt
-                      width="100px"
-                    />
+                    <img :src="cookData.img" alt width="100px" />
                   </span>
                   <span>
-                    商品名称
-                    <p>￥18元</p>
+                    {{cookData.cookName}}
+                    <p>￥{{cookData.price}}元</p>
                   </span>
                 </li>
               </ul>
@@ -70,91 +66,14 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "Pos",
   data() {
     return {
-      tableData: [
-        {
-          goodsName: "汉堡",
-          count: "1",
-          money: "18"
-        },
-        {
-          goodsName: "鸡腿",
-          count: "1",
-          money: "18"
-        },
-        {
-          goodsName: "可乐",
-          count: "1",
-          money: "18"
-        },
-        {
-          goodsName: "鸡翅",
-          count: "1",
-          money: "18"
-        },
-        {
-          goodsName: "甜筒",
-          count: "1",
-          money: "18"
-        }
-      ],
-      goodsDatas: [
-        {
-          goodsName: "鸡阿打算大所大翅",
-          price: 18
-        },
-        {
-          goodsName: "鸡翅",
-          price: 18
-        },
-        {
-          goodsName: "三生三世",
-          price: 18
-        },
-        {
-          goodsName: "鸡翅",
-          price: 18
-        },
-        {
-          goodsName: "鸡翅",
-          price: 18
-        },
-        {
-          goodsName: "鸡翅",
-          price: 18
-        },
-        {
-          goodsName: "鸡圣斗士大大翅",
-          price: 18
-        },
-        {
-          goodsName: "鸡的点点滴滴翅",
-          price: 18
-        },
-        {
-          goodsName: "鸡少时诵诗书所翅",
-          price: 18
-        },
-        {
-          goodsName: "鸡翅",
-          price: 18
-        },
-        {
-          goodsName: "鸡ghj翅",
-          price: 18
-        },
-        {
-          goodsName: "鸡翅",
-          price: 18
-        },
-        {
-          goodsName: "鸡翅",
-          price: 18
-        }
-      ]
+      tableData: [],
+      goodsDatas: [],
+      cookDatas: []
     };
   },
   methods: {
@@ -165,6 +84,38 @@ export default {
       rows.splice(index, 1);
     }
   },
+  created() {
+    axios({
+      url: "static/tableData.json",
+      method: "GET"
+    })
+      .then(response => {
+        this.tableData = response.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    axios({
+      url: "static/goodsDatas.json",
+      method: "GET"
+    })
+      .then(response => {
+        this.goodsDatas = response.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    axios({
+      url: "static/cookDatas.json",
+      method: "GET"
+    })
+      .then(response => {
+        this.cookDatas = response.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  },
   mounted() {
     let orderHeight = document.body.clientHeight;
     document.getElementById("order-list").style.height = orderHeight + "px";
@@ -173,16 +124,18 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="stylus" scoped>
 .pos-order {
   background-color: #f9fafc;
   border-right: 1px solid #c0ccda;
   height: 100%;
   padding: 10px;
 }
+
 .btn-row {
   padding-top: 10px;
 }
+
 .title {
   height: 50px;
   background-color: #f9fafc;
@@ -191,29 +144,49 @@ export default {
   text-align: left;
   line-height: 50px;
 }
+
 .goods-list {
   height: 350px;
+
+  ul {
+    li {
+      float: left;
+      list-style: none;
+      border: 1px solid #e5e9f2;
+      background-color: #fff;
+      padding: 10px;
+      margin: 10px;
+    }
+  }
 }
-.goods-list ul li {
-  float: left;
-  list-style: none;
-  border: 1px solid #e5e9f2;
-  background-color: #fff;
-  padding: 10px;
-  margin: 10px;
-}
+
 .price {
   color: #58b7ef;
 }
+
 .goods-type {
   clear: both;
   margin: 10px;
 }
-.cookList li {
-  float: left;
-  list-style: none;
-  background-color: #fff;
-  border: 1px solid #e5e9f2;
-  display: flex;
+
+.cookList {
+  li {
+    float: left;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid #e5e9f2;
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+    margin: 5 px;
+
+    span:nth-of-type(2) {
+      color: red;
+
+      p {
+        color: #333;
+      }
+    }
+  }
 }
 </style>

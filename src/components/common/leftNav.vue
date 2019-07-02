@@ -53,9 +53,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang="stylus">
 .iconfont {
-  font-size: 20px;
+  font-size: 18px;
   color: #ffffff !important;
 }
 </style>
