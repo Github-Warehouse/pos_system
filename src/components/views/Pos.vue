@@ -187,7 +187,6 @@ export default {
 .pos-order {
   background-color: #f9fafc;
   border-right: 1px solid #c0ccda;
-  height: 100%;
   padding: 10px;
 }
 

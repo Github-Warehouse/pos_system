@@ -10,18 +10,24 @@
           text-color="#fff"
           active-text-color="#ffd04b"
         >
-          <el-menu-item index="1">
-            <i class="icon iconfont icon-goumai"></i>
-            <span slot="title">收银</span>
-          </el-menu-item>
-          <el-menu-item index="2">
-            <i class="icon iconfont icon-dianpu"></i>
-            <span slot="title">店铺</span>
-          </el-menu-item>
-          <el-menu-item index="3">
-            <i class="icon iconfont icon-hanbao"></i>
-            <span slot="title">商品</span>
-          </el-menu-item>
+          <router-link to="/views/Pos">
+            <el-menu-item index="1">
+              <i class="icon iconfont icon-goumai"></i>
+              <span slot="title">收银</span>
+            </el-menu-item>
+          </router-link>
+          <router-link to="../views/Shop">
+            <el-menu-item index="2">
+              <i class="icon iconfont icon-dianpu"></i>
+              <span slot="title">店铺</span>
+            </el-menu-item>
+          </router-link>
+          <router-link to="../views/Commodity">
+            <el-menu-item index="3">
+              <i class="icon iconfont icon-hanbao"></i>
+              <span slot="title">商品</span>
+            </el-menu-item>
+          </router-link>
           <el-menu-item index="4">
             <i class="icon iconfont icon-huiyuanqia"></i>
             <span slot="title">会员</span>
@@ -57,5 +63,9 @@ export default {
 .iconfont {
   font-size: 18px;
   color: #ffffff !important;
+}
+
+a {
+  text-decoration: none;
 }
 </style>
