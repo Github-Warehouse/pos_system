@@ -12,7 +12,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/login/Login',
       name: 'Login',
       component: Login
     },
@@ -22,7 +22,7 @@ export default new Router({
       component: Register
     },
     {
-      path: '/views/Pos',
+      path: '/',
       component: Excessive,
       children: [
         {

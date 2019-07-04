@@ -149,7 +149,7 @@ export default {
           type: "success"
         });
       } else {
-        this.$message.error("商品列表为空，请先添加商品！");
+        this.$message.error("商品列表不能为空，请先添加商品！");
       }
     }
   },
