@@ -5,12 +5,12 @@
         <el-row>
           <el-col :span="2" :offset="10">
             <h3>
-              <span class="quickLogin">快捷登录</span>
+              <span class="quickLogin" @click="quickLogin">快捷登录</span>
             </h3>
           </el-col>
           <el-col :span="2">
             <h3>
-              <span class="ordinaryLogin">普通登录</span>
+              <span class="ordinaryLogin" @click="ordinaryLogin">普通登录</span>
             </h3>
           </el-col>
         </el-row>
@@ -19,11 +19,22 @@
         <el-row>
           <el-col :span="6" :offset="9">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
-              <el-form-item label="账号：" prop="username" class="demo">
-                <el-input v-model="ruleForm.username" placeholder="已绑定的手机/邮箱/QQ号"></el-input>
+              <div v-if="isHave">
+                <el-form-item label="商户ID：" prop="merchantID">
+                  <el-input v-model="ruleForm.merchantID" placeholder="请输入8位商户ID"></el-input>
+                </el-form-item>
+                <el-form-item label="用户名：" prop="username">
+                  <el-input v-model="ruleForm.username" placeholder="请输入4位用户名"></el-input>
+                </el-form-item>
+                <el-form-item label="密码：" prop="password">
+                  <el-input v-model="ruleForm.password" placeholder="请输入用户密码" key="password"></el-input>
+                </el-form-item>
+              </div>
+              <el-form-item label="账号：" prop="accountNumber" v-if="!isHave">
+                <el-input v-model="ruleForm.accountNumber" placeholder="已绑定的手机/邮箱/QQ号"></el-input>
               </el-form-item>
-              <el-form-item label="密码：" prop="password">
-                <el-input v-model="ruleForm.password" placeholder="请输入用户密码"></el-input>
+              <el-form-item label="密码：" prop="password" v-if="!isHave">
+                <el-input v-model="ruleForm.password" placeholder="请输入用户密码" key="password"></el-input>
               </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
@@ -51,34 +62,70 @@
 export default {
   name: "Login",
   data() {
+    var validateMerchantID = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入8位商户ID"));
+      } else {
+        callback();
+      }
+    };
+    var validateUsername = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入用户名"));
+      } else {
+        callback();
+      }
+    };
+    var validatePassword = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入密码"));
+      } else {
+        callback();
+      }
+    };
+    var validateAccountNumber = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入已绑定的手机/邮箱/QQ号"));
+      } else {
+        callback();
+      }
+    };
     return {
+      isHave: true,
       ruleForm: {
+        merchantID: "",
         username: "",
+        accountNumber: "",
         password: ""
       },
       rules: {
+        merchantID: [
+          { required: true, validator: validateMerchantID, trigger: "blur" }
+        ],
         username: [
-          {
-            required: true,
-            message: "请输入已绑定的手机/邮箱/QQ号",
-            trigger: "blur"
-          }
-          // { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+          { required: true, validator: validateUsername, trigger: "blur" }
+        ],
+        accountNumber: [
+          { required: true, validator: validateAccountNumber, trigger: "blur" }
         ],
         password: [
-          { required: true, message: "请输入密码", trigger: "blur" }
-          // { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+          { required: true, validator: validatePassword, trigger: "blur" }
         ]
       }
     };
   },
   methods: {
+    quickLogin() {
+      this.isHave = false;
+    },
+    ordinaryLogin() {
+      this.isHave = true;
+    },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert("submit!");
+          this.$router.push('/')
         } else {
-          console.log("error submit!!");
           return false;
         }
       });

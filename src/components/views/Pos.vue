@@ -76,6 +76,7 @@
 
 <script>
 import axios from "axios";
+import { getGoodsData,getCookData } from "@/components/common/http";
 export default {
   name: "Pos",
   data() {
@@ -153,27 +154,11 @@ export default {
       }
     }
   },
-  created() {
-    axios({
-      url: "static/goodsData.json",
-      method: "GET"
-    })
-      .then(response => {
-        this.goodsData = response.data;
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    axios({
-      url: "static/cookData.json",
-      method: "GET"
-    })
-      .then(response => {
-        this.cookData = response.data;
-      })
-      .catch(error => {
-        console.log(error);
-      });
+  async created() {
+    let responseGoodsData = await getGoodsData();
+    this.goodsData = responseGoodsData;
+    let responseCookData = await getCookData();
+    this.cookData=responseCookData
   },
   mounted() {
     let orderHeight = document.body.clientHeight;
