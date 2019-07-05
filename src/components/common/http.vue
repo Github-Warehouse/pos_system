@@ -1,27 +1,18 @@
 <script>
 import axios from "axios";
-export function getGoodsData() {
-  return axios({
-    url: "static/goodsData.json",
-    method: "GET"
-  })
-    .then(response => {
-      return response.data;
+const http = {
+  get(url) {
+    return axios({
+      url,
+      method: "GET"
     })
-    .catch(error => {
-      console.log(error);
-    });
-}
-export function getCookData() {
-  return axios({
-    url: "static/cookData.json",
-    method: "GET"
-  })
-    .then(response => {
-      return response.data;
-    })
-    .catch(error => {
-      console.log(error);
-    });
-}
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+};
+export default http;
 </script>

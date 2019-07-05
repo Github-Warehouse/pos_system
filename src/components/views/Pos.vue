@@ -76,7 +76,7 @@
 
 <script>
 import axios from "axios";
-import { getGoodsData,getCookData } from "@/components/common/http";
+import http from "@/components/common/http";
 export default {
   name: "Pos",
   data() {
@@ -155,9 +155,9 @@ export default {
     }
   },
   async created() {
-    let responseGoodsData = await getGoodsData();
+    let responseGoodsData = await http.get('static/goodsData.json');
     this.goodsData = responseGoodsData;
-    let responseCookData = await getCookData();
+    let responseCookData = await http.get('static/cookData.json');
     this.cookData=responseCookData
   },
   mounted() {
