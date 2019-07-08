@@ -16,12 +16,20 @@
               <span slot="title">收银</span>
             </el-menu-item>
           </router-link>
-          <router-link to="/views/Shop">
-            <el-menu-item index="2">
+          <el-submenu index="2">
+            <template slot="title">
               <i class="icon iconfont icon-dianpu"></i>
               <span slot="title">店铺</span>
-            </el-menu-item>
-          </router-link>
+            </template>
+            <el-menu-item-group>
+              <router-link to="/views/StoreManagement">
+                <el-menu-item index="1-1">门店管理</el-menu-item>
+              </router-link>
+              <router-link to="/views/ClerkManagement">
+                <el-menu-item index="1-2">店员管理</el-menu-item>
+              </router-link>
+            </el-menu-item-group>
+          </el-submenu>
           <router-link to="/views/Commodity">
             <el-menu-item index="3">
               <i class="icon iconfont icon-hanbao"></i>
@@ -40,12 +48,23 @@
               <span slot="title">统计</span>
             </el-menu-item>
           </router-link>
-          <router-link to="/views/SetUp">
-            <el-menu-item index="6">
+          <el-submenu index="6">
+            <template slot="title">
               <i class="icon iconfont icon-gongnengjianyi"></i>
               <span slot="title">设置</span>
-            </el-menu-item>
-          </router-link>
+            </template>
+            <el-menu-item-group>
+              <router-link to="/views/PersonalAccount">
+                <el-menu-item index="1-1">个人账号</el-menu-item>
+              </router-link>
+              <router-link to="/views/DataCleaning">
+                <el-menu-item index="1-2">数据清理</el-menu-item>
+              </router-link>
+              <router-link to="/views/PaymentSettings">
+                <el-menu-item index="1-3">支付设置</el-menu-item>
+              </router-link>
+            </el-menu-item-group>
+          </el-submenu>
         </el-menu>
       </el-col>
     </el-row>
@@ -56,10 +75,10 @@
 export default {
   methods: {
     handleOpen(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
     }
   }
 };

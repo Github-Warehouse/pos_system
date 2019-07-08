@@ -12,8 +12,8 @@ export default {
     };
   },
   async created() {
-    let response = await http.get("/RptHomeView/GetSaleData?BranchId=");
-    console.log(response);
+    // let response = await http.get("/RptHomeView/GetSaleData?BranchId=");
+    // console.log(response);
   }
 };
 </script>

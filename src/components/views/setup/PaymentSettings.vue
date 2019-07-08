@@ -4,10 +4,10 @@
 
 <script>
 export default {
-  name: "Shop",
+  name: "PaymentSettings",
   data() {
     return {
-      message: "店铺"
+      message: "支付设置"
     };
   }
 };

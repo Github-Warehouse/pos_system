@@ -5,9 +5,12 @@ import Register from '@/components/register/Register'
 import Commodity from '@/components/views/Commodity'
 import Member from '@/components/views/Member'
 import Pos from '@/components/views/Pos'
-import Shop from '@/components/views/Shop'
+import StoreManagement from '@/components/views/shop/StoreManagement'
+import ClerkManagement from '@/components/views/shop/ClerkManagement'
 import Statistics from '@/components/views/Statistics'
-import SetUp from '@/components/views/setup/SetUp'
+import PersonalAccount from '@/components/views/setup/PersonalAccount'
+import DataCleaning from '@/components/views/setup/DataCleaning'
+import PaymentSettings from '@/components/views/setup/PaymentSettings'
 import Excessive from '@/components/views/Excessive'
 
 Vue.use(Router)
@@ -34,9 +37,14 @@ export default new Router({
           component: Pos
         },
         {
-          path: '/views/Shop',
-          name: 'Shop',
-          component: Shop
+          path: '/views/StoreManagement',
+          name: 'StoreManagement',
+          component: StoreManagement
+        },
+        {
+          path: '/views/ClerkManagement',
+          name: 'ClerkManagement',
+          component: ClerkManagement
         },
         {
           path: '/views/Commodity',
@@ -54,9 +62,19 @@ export default new Router({
           component: Statistics
         },
         {
-          path: '/views/SetUp',
-          name: 'SetUp',
-          component: SetUp
+          path: '/views/PersonalAccount',
+          name: 'PersonalAccount',
+          component: PersonalAccount
+        },
+        {
+          path: '/views/DataCleaning',
+          name: 'DataCleaning',
+          component: DataCleaning
+        },
+        {
+          path: '/views/PaymentSettings',
+          name: 'PaymentSettings',
+          component: PaymentSettings
         }
       ]
     }

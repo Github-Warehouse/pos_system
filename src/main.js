@@ -9,8 +9,8 @@ import axios from 'axios'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
-axios.defaults.baseURL = 'http://cy.td365.com.cn';
-axios.defaults.withCredentials = true;
+// axios.defaults.baseURL = 'http://cy.td365.com.cn';
+// axios.defaults.withCredentials = true;
 
 /* eslint-disable no-new */
 new Vue({

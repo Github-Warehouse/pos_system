@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-container>
-      <el-aside width="150px">
+      <el-aside width="200px">
         <leftNav></leftNav>
       </el-aside>
 

@@ -4,10 +4,10 @@
 
 <script>
 export default {
-  name: "SetUp",
+  name: "ClerkManagement",
   data() {
     return {
-      message: "设置"
+      message: "店员管理"
     };
   }
 };
