@@ -16,30 +16,36 @@
               <span slot="title">收银</span>
             </el-menu-item>
           </router-link>
-          <router-link to="../views/Shop">
+          <router-link to="/views/Shop">
             <el-menu-item index="2">
               <i class="icon iconfont icon-dianpu"></i>
               <span slot="title">店铺</span>
             </el-menu-item>
           </router-link>
-          <router-link to="../views/Commodity">
+          <router-link to="/views/Commodity">
             <el-menu-item index="3">
               <i class="icon iconfont icon-hanbao"></i>
               <span slot="title">商品</span>
             </el-menu-item>
           </router-link>
-          <el-menu-item index="4">
-            <i class="icon iconfont icon-huiyuanqia"></i>
-            <span slot="title">会员</span>
-          </el-menu-item>
-          <el-menu-item index="5">
-            <i class="icon iconfont icon-tongji1"></i>
-            <span slot="title">统计</span>
-          </el-menu-item>
-          <el-menu-item index="6">
-            <i class="icon iconfont icon-gongnengjianyi"></i>
-            <span slot="title">设置</span>
-          </el-menu-item>
+          <router-link to="/views/Member">
+            <el-menu-item index="4">
+              <i class="icon iconfont icon-huiyuanqia"></i>
+              <span slot="title">会员</span>
+            </el-menu-item>
+          </router-link>
+          <router-link to="/views/Statistics">
+            <el-menu-item index="5">
+              <i class="icon iconfont icon-tongji1"></i>
+              <span slot="title">统计</span>
+            </el-menu-item>
+          </router-link>
+          <router-link to="/views/SetUp">
+            <el-menu-item index="6">
+              <i class="icon iconfont icon-gongnengjianyi"></i>
+              <span slot="title">设置</span>
+            </el-menu-item>
+          </router-link>
         </el-menu>
       </el-col>
     </el-row>
