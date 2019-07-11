@@ -70,6 +70,7 @@ export default {
   data() {
     return {
       input: "",
+      checked: "",
       tableData: [
         {
           serialNumber: "1",

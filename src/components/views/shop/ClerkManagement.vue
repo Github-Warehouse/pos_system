@@ -32,7 +32,7 @@
                 >删除</el-button>
               </template>
             </el-table-column>
-            <el-table-column prop="uername" label="用户名" width="130"></el-table-column>
+            <el-table-column prop="username" label="用户名" width="130"></el-table-column>
             <el-table-column prop="fullName" label="姓名" width="130"></el-table-column>
             <el-table-column prop="store" label="门店" width="130"></el-table-column>
             <el-table-column prop="role" label="角色" width="130"></el-table-column>
@@ -56,7 +56,7 @@ export default {
       input: "",
       tableData: [
         {
-          uername: "1001",
+          username: "1001",
           fullName: "管理员",
           store: "快餐",
           role: "系统管理员",
@@ -66,7 +66,7 @@ export default {
           phone: "17600129340",
           state: "正常"
         },{
-          uername: "1001",
+          username: "1001",
           fullName: "管理员",
           store: "快餐",
           role: "系统管理员",
@@ -76,7 +76,7 @@ export default {
           phone: "17600129340",
           state: "正常"
         },{
-          uername: "1001",
+          username: "1001",
           fullName: "管理员",
           store: "快餐",
           role: "系统管理员",
@@ -86,7 +86,7 @@ export default {
           phone: "17600129340",
           state: "正常"
         },{
-          uername: "1001",
+          username: "1001",
           fullName: "管理员",
           store: "快餐",
           role: "系统管理员",
@@ -96,7 +96,7 @@ export default {
           phone: "17600129340",
           state: "正常"
         },{
-          uername: "1001",
+          username: "1001",
           fullName: "管理员",
           store: "快餐",
           role: "系统管理员",
@@ -106,7 +106,7 @@ export default {
           phone: "17600129340",
           state: "正常"
         },{
-          uername: "1001",
+          username: "1001",
           fullName: "管理员",
           store: "快餐",
           role: "系统管理员",
@@ -116,7 +116,7 @@ export default {
           phone: "17600129340",
           state: "正常"
         },{
-          uername: "1001",
+          username: "1001",
           fullName: "管理员",
           store: "快餐",
           role: "系统管理员",

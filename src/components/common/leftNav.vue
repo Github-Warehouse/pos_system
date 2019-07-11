@@ -57,9 +57,6 @@
               <router-link to="/views/PersonalAccount">
                 <el-menu-item index="1-1">个人账号</el-menu-item>
               </router-link>
-              <router-link to="/views/DataCleaning">
-                <el-menu-item index="1-2">数据清理</el-menu-item>
-              </router-link>
               <router-link to="/views/PaymentSettings">
                 <el-menu-item index="1-3">支付设置</el-menu-item>
               </router-link>

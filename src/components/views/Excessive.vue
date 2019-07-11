@@ -39,7 +39,7 @@ export default {
 }
 
 .el-main {
-  background-color: #e9eef3;
+  background-color: #ffffff;
   padding: 0;
 }
 

@@ -9,7 +9,6 @@ import StoreManagement from '@/components/views/shop/StoreManagement'
 import ClerkManagement from '@/components/views/shop/ClerkManagement'
 import Statistics from '@/components/views/Statistics'
 import PersonalAccount from '@/components/views/setup/PersonalAccount'
-import DataCleaning from '@/components/views/setup/DataCleaning'
 import PaymentSettings from '@/components/views/setup/PaymentSettings'
 import Excessive from '@/components/views/Excessive'
 
@@ -66,11 +65,6 @@ export default new Router({
           path: '/views/PersonalAccount',
           name: 'PersonalAccount',
           component: PersonalAccount
-        },
-        {
-          path: '/views/DataCleaning',
-          name: 'DataCleaning',
-          component: DataCleaning
         },
         {
           path: '/views/PaymentSettings',
