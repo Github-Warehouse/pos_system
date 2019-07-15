@@ -124,7 +124,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$router.push('/')
+          this.$router.push('/Pos')
         } else {
           return false;
         }

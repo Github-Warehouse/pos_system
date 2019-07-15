@@ -23,12 +23,12 @@ export default new Router({
       component: Login
     },
     {
-      path: '/register/Register',
+      path: '/',
       name: 'Register',
       component: Register
     },
     {
-      path: '/',
+      path: '/Pos',
       component: Excessive,
       children: [
         {

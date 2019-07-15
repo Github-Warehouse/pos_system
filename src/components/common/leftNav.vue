@@ -10,7 +10,7 @@
           text-color="#fff"
           active-text-color="#ffd04b"
         >
-          <router-link to="/">
+          <router-link to="/Pos">
             <el-menu-item index="1">
               <i class="icon iconfont icon-goumai"></i>
               <span slot="title">收银</span>
